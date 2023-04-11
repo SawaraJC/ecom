@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoute.js";
-
+import cors from "cors";
 //configure env
 dotenv.config();
 //database config
@@ -12,13 +12,14 @@ connectDB();
 //rest objects
 const app = express();
 //middlewares
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 //routes
 app.use("/api/v1/auth", authRoutes);
 //rest api
 app.get("/", (req, res) => {
-  res.send("<hi><b>Welcome to our website</b></hi>");
+  res.send("<h1><b>Welcome to our website</b></h1>");
 });
 //PORT
 const PORT = process.env.PORT || 8080; //react runs on 8080 port  || 8080 is written for worst case
